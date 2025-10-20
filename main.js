@@ -399,90 +399,71 @@ case 'ping': {
 }
 break;
                     case 'menu': {
-                    try {
-                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
+                    const startTime = socketCreationTime.get(number) || Date.now();
+                    const uptime = Math.floor((Date.now() - startTime) / 1000);
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = Math.floor(uptime % 60);
 
-                        const startTime = socketCreationTime.get(number) || Date.now();
-                        const uptime = Math.floor((Date.now() - startTime) / 1000);
-                        const hours = Math.floor(uptime / 3600);
-                        const minutes = Math.floor((uptime % 3600) / 60);
-                        const seconds = Math.floor(uptime % 60);
-                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
-                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
-                        
-                        const message = `『 👋 Hello 』
-                    
-> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
+                    await socket.sendMessage(sender, { 
+                        react: { 
+                            text: "⬇️",
+                            key: msg.key 
+                        } 
+                    });
 
-┏━━━━━━━━━━━━━━━➢
-┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
-┠➥ *ᴘʀᴇғɪx: .*
-┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
-┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
-┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
-┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: VISHWAPRIVETE*
-┠➥ *ᴘʟᴀᴛғᴏʀᴍ: VPS*
-┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: VPSERVER*
-┗━━━━━━━━━━━━━━━➢
+                    const kariyane = `┏━❐  \`ℍ 𝔼 𝕃 𝕃 𝕆\`
+┃ *⭔ Itz:*  *ＲＯＢＩＮ-Ｘ-ＭＩＮＩ*
+┃ *⭔ Type:* *ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ*
+┃ *⭔ Platform:* Heroku
+┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+┗━❐
 
-*\`《━━━Mini Bot Commands━━━》\`*
+┏━❐
+┃ ⭔| 📌Pair  (ᴅᴇᴘʟᴏʏ ᴏᴜʀ ʙᴏᴛ ʏᴏᴜʀ ɴᴜᴍʙᴇʀ ꜰᴜʟʟ ꜰʀᴇᴇ)
+┃ ⭔| 📌Song  
+┃ ⭔| 📌Apk  
+┃ ⭔| 📌Tiktok  
+┃ ⭔| 📌Facebook  
+┃ ⭔| 📌Ig  
+┃ ⭔| 📌Img  
+┃ ⭔| 📌News  
+┃ ⭔| 📌Jid  
+┃ ⭔| 📌Fc  
+┃ ⭔| 📌Boom  
 
-> 📌 ᴀʟɪᴠᴇ
-> 📌 ᴍᴇɴᴜ
-> 📌 ᴘɪɴɢ
-> 📌 sᴏɴɢ
-> 📌 ᴠɪᴅᴇᴏ
-> 📌 sᴇᴛᴛɪɴɢs
-> 📌 ꜰʙ
-> 📌 ғʀᴇᴇʙᴏᴛ
-> 📌 sᴇᴛᴇᴍᴏᴊɪ
 
-${botcap}`
-
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: msg });
-                    } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
-                    }
-                }
-                break;
-
-                case 'song': case 'yta': {
-                    try {
-                        const q = args.join(" ");
-                        if (!q) {
-                            return await replygckavi("🚫 Please provide a search query.");
-                        }
-
-                        let ytUrl;
-                        if (q.includes("youtube.com") || q.includes("youtu.be")) {
-                            ytUrl = q;
-                        } else {
-                            const search = await yts(q);
-
-                            if (!search.videos.length) {
-                                return await replygckavi("🚫 No results found.");
+> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴏʙɪɴ-x-ᴍɪɴɪ*
+`;
+    
+                    const sentMsg = await socket.sendMessage(sender, {
+                        image: { url: `https://i.ibb.co/gLXKj231/103.jpg` },
+                        caption: kariyane,
+                        contextInfo: {
+                            mentionedJid: ['94728132970@s.whatsapp.net'],
+                            groupMentions: [],
+                            forwardingScore: 999,
+                            isForwarded: false,
+                            forwardedNewsletterMessageInfo: {
+                                newsletterJid: '120363417836848173@newsletter',
+          newsletterName: "ZEUS SUPPORT 🎀",
+          serverMessageId: 999
+                            },
+                            externalAdReply: {
+                                title: `◉ʀᴏʙɪɴ-x-ᴍɪɴɪ-ʙᴏᴛ◉`,
+                                body: `Add name 🧼`,
+                                mediaType: 1,
+                                sourceUrl: "https://robin-xmd-mini.onrender.com/",
+                                thumbnailUrl: `https://i.ibb.co/gLXKj231/103.jpg`,
+                                renderLargerThumbnail: false,
+                                showAdAttribution: false
                             }
-                            ytUrl = search.videos[0].url;
                         }
-
-                        const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${encodeURIComponent(ytUrl)}&format=mp3&apikey=sadiya`;
-                        const { data: apiRes } = await axios.get(api);
-
-                        if (!apiRes?.status || !apiRes.result?.download) {
-                            return await replygckavi("🚫 Something went wrong.");
+                    });
+                    break;
                         }
-
-                        const result = apiRes.result;
-
-                        const caption = `*ℹ️ Title :* \`${result.title}\`\n*⏱️ Duration :* \`${result.duration}\`\n*🧬 Views :* \`${result.views}\`\n📅 *Released Date :* \`${result.publish}\``;
-
-                        await socket.sendMessage(sender, { image: { url: result.thumbnail }, caption: caption }, { quoted: msg });
-                        await socket.sendMessage(sender, { audio: { url: result.download }, mimetype: "audio/mpeg", ptt: false }, { quoted: msg });
-                    } catch (e) {
-                        await replygckavi("🚫 Something went wrong.");
-                    }
-                }
-                break;
+                    
+                        
                 
                 case 'fb': {
                     const fbUrl = args[0];
