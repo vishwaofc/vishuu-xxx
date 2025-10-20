@@ -368,54 +368,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
 
         // Commands(All) Handler - CyberKavi - sell\\
         try {
-            switch (command) {
-                     case 'menu': {
-          const startTime = socketCreationTime.get(number) || Date.now();
-          const uptime = Math.floor((Date.now() - startTime) / 1000);
-          const hours = Math.floor(uptime / 3600);
-          const minutes = Math.floor((uptime % 3600) / 60);
-          const seconds = Math.floor(uptime % 60);
-
-          await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
-
-          const menuTxt = `┏━❐  \`ℍ 𝔼 𝕃 𝕃 𝕆\`
-┃ *⭔ Itz:*  *Vishwa-MD-MINI*
-┃ *⭔ Type:* *ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ*
-┃ *⭔ Platform:* Heroku
-┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
-┗━❐
-
-┏━❐
-┃ ⭔| pair
-┃ ⭔| song  
-┃ ⭔| apk  
-┃ ⭔| tiktok  
-┃ ⭔| ig  
-┃ ⭔| img  
-┃ ⭔| jid  
-┃ ⭔| fc  
-┃ ⭔| boom 
-┗━❐
-
-🫟 Other Features:
-  ◍ Auto view status
-  ◍ Auto like status
-  ◍ Auto recording
-  ◍ Auto react
-       
-*│➤ ABOUT*
-│ ◦ Check bot = ping
-│ ◦ ConnectUs = owner
-
-`;
-
-          await socket.sendMessage(sender, {
-            image: { url: 'https://files.catbox.moe/ypeipb.jpg' },
-            caption: menuTxt
-          });
-          break;
-       
-        
+            switch (command) {                     
 case 'ping': {
     try {
         await socket.sendMessage(sender, { react: { text: "⏱️", key: msg.key, }}, { quoted: msg }); // Added reaction
@@ -445,6 +398,53 @@ case 'ping': {
     }
 }
 break;
+                    case 'menu': {
+                    try {
+                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
+
+                        const startTime = socketCreationTime.get(number) || Date.now();
+                        const uptime = Math.floor((Date.now() - startTime) / 1000);
+                        const hours = Math.floor(uptime / 3600);
+                        const minutes = Math.floor((uptime % 3600) / 60);
+                        const seconds = Math.floor(uptime % 60);
+                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
+                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
+                        
+                        const message = `『 👋 Hello 』
+                    
+> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
+
+┏━━━━━━━━━━━━━━━➢
+┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
+┠➥ *ᴘʀᴇғɪx: .*
+┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
+┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
+┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
+┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: VISHWAPRIVETE*
+┠➥ *ᴘʟᴀᴛғᴏʀᴍ: VPS*
+┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: VPSERVER*
+┗━━━━━━━━━━━━━━━➢
+
+*\`《━━━Mini Bot Commands━━━》\`*
+
+> 📌 ᴀʟɪᴠᴇ
+> 📌 ᴍᴇɴᴜ
+> 📌 ᴘɪɴɢ
+> 📌 sᴏɴɢ
+> 📌 ᴠɪᴅᴇᴏ
+> 📌 sᴇᴛᴛɪɴɢs
+> 📌 ꜰʙ
+> 📌 ғʀᴇᴇʙᴏᴛ
+> 📌 sᴇᴛᴇᴍᴏᴊɪ
+
+${botcap}`
+
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: msg });
+                    } catch (error) {
+                        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
+                    }
+                }
+                break;
 
                 case 'song': case 'yta': {
                     try {
