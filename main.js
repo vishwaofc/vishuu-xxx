@@ -369,53 +369,61 @@ async function kavixmdminibotmessagehandler(socket, number) {
         // Commands(All) Handler - CyberKavi - sell\\
         try {
             switch (command) {
-                case 'menu': {
-                    try {
-                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
+        case 'menu': {
+    try {
+        // Add a reaction to the user's message for a lively feel
+        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
 
-                        const startTime = socketCreationTime.get(number) || Date.now();
-                        const uptime = Math.floor((Date.now() - startTime) / 1000);
-                        const hours = Math.floor(uptime / 3600);
-                        const minutes = Math.floor((uptime % 3600) / 60);
-                        const seconds = Math.floor(uptime % 60);
-                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
-                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
-                        
-                        const message = `『 👋 Hello 』
-                    
-> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
+        const startTime = socketCreationTime.get(number) || Date.now();
+        const uptime = Math.floor((Date.now() - startTime) / 1000);
+        const hours = Math.floor(uptime / 3600);
+        const minutes = Math.floor((uptime % 3600) / 60);
+        const seconds = Math.floor(uptime % 60);
 
-┏━━━━━━━━━━━━━━━➢
-┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
-┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
-┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
-┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
-┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
-┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
-┠➥ *ᴘʟᴀᴛғᴏʀᴍ: ${os.platform()}*
-┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
-┗━━━━━━━━━━━━━━━➢
+        // Styling the title section with decorative elements
+        const title = `『 👋 H E L L O W 』
+*┌───「 𝙱𝙾𝚃 𝚂𝚈𝚂𝚃𝙴𝙼 」*
+*│ ⭔ Itz:* VISHWA-MD
+*│ ⭔ Type:* MINI BOT
+*│ ⭔ Platform:* Heroku
+*│ ⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+*└──────────*`;
 
-*\`《━━━Mini Bot Commands━━━》\`*
+        // Styling the content section with dividers and clear sections
+        const content = `*\`《━━━ BOT I N F O ━━━》\`*
+> 🤖 *Version:* 1.0.0
+> ⚙️ *Prefix:* ${config.PREFIX}
+> 🔗 *Base:* WhatsApp WebJS
+---
+*© BY VISHWAOFC*
+*» A B O U T «*
+> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.
 
-> 📌 ᴀʟɪᴠᴇ
-> 📌 ᴍᴇɴᴜ
-> 📌 ᴘɪɴɢ
-> 📌 sᴏɴɢ
-> 📌 ᴠɪᴅᴇᴏ
-> 📌 sᴇᴛᴛɪɴɢs
-> 📌 ꜰʙ
-> 📌 ғʀᴇᴇʙᴏᴛ
-> 📌 sᴇᴛᴇᴍᴏᴊɪ
+*» D E P L O Y «*
+> *Website* https://Vishwa-md.vercel.app`;
 
-${botcap}`
+        // Footer with a clear call-to-action or credit
+        const footer = `> ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍɪɴɪ-ʙᴏᴛ`;
 
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: msg });
-                    } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
-                    }
-                }
-                break;
+        await socket.sendMessage(sender, {
+            image: { url: `https://files.catbox.moe/ypeipb.jpg` },
+            // Using the original formatMessage function and content
+            caption: formatMessage(title, content, footer),
+            // Keeping the original buttons for navigation
+            buttons: [
+                { buttonId: `${config.PREFIX}downloadmenu`, buttonText: { displayText: 'MINI-COMMANDS' }, type: 1 },
+                { buttonId: `${config.PREFIX}system`, buttonText: { displayText: 'VISHWA-STATUS' }, type: 1 },
+                { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: 'MINI-BOT-OWNER' }, type: 1 },
+                { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'MINI-BOT-SPEED' }, type: 1 }
+            ],
+            quoted: msg
+        });
+    } catch (error) {
+        // Using the error handling from the second block
+        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
+    }
+}
+break;        
 
                 case 'ping': {
     try {
