@@ -424,7 +424,8 @@ break;
 ┃ ⭔| 📌Song  
 ┃ ⭔| 📌Apk  
 ┃ ⭔| 📌Tiktok  
-┃ ⭔| 📌Facebook  
+┃ ⭔| 📌Fb 
+┃ ⭔| 📌chid
 ┃ ⭔| 📌Ig  
 ┃ ⭔| 📌Img  
 ┃ ⭔| 📌News  
@@ -432,12 +433,11 @@ break;
 ┃ ⭔| 📌Fc  
 ┃ ⭔| 📌Boom  
 
-
-> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴏʙɪɴ-x-ᴍɪɴɪ*
+> *©ᴠɪꜱʜᴡᴀ-ᴍᴅ ᴍɪɴɪ ʙᴏᴛ*
 `;
     
                     const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: `https://i.ibb.co/gLXKj231/103.jpg` },
+                        image: { url: `https://files.catbox.moe/ypeipb.jpg` },
                         caption: kariyane,
                         contextInfo: {
                             mentionedJid: ['94728132970@s.whatsapp.net'],
@@ -454,7 +454,7 @@ break;
                                 body: `Add name 🧼`,
                                 mediaType: 1,
                                 sourceUrl: "https://robin-xmd-mini.onrender.com/",
-                                thumbnailUrl: `https://i.ibb.co/gLXKj231/103.jpg`,
+                                thumbnailUrl: `https://files.catbox.moe/ypeipb.jpg`,
                                 renderLargerThumbnail: false,
                                 showAdAttribution: false
                             }
