@@ -11,7 +11,7 @@ const axios = require('axios');
 const { default: makeWASocket, useMultiFileAuthState, delay, makeCacheableSignalKeyStore,  Browsers, DisconnectReason, jidDecode } = require('@whiskeysockets/baileys');
 const yts = require('yt-search');
 
-const MONGODB_URI = 'mongodb+srv://jxjdjddkddvishuwsj_db_user:xndXB9LIk02sgaUM@vishwaofc.d6gzmef.mongodb.net/';
+const MONGODB_URI = 'mongodb+srv://mrshrii404:JLtbz0CEOC1u6CwS@shri.gkhohrr.mongodb.net/';
 const OWNER_NUMBERS = [94765684096];
 
 mongoose.connect(MONGODB_URI, {
