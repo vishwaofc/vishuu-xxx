@@ -371,7 +371,9 @@ async function kavixmdminibotmessagehandler(socket, number) {
             switch (command) {
         case 'menu': {
     try {
-        // Add a reaction to the user's message for a lively feel
+        // Assume 'socket', 'sender', 'msg', 'number', 'socketCreationTime' are defined in the outer scope
+        // Assume 'os', 'cfg', 'config', 'prefix', 'PREFIX', 'botImg', 'botcap', 'boterr' are defined or imported
+
         await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
 
         const startTime = socketCreationTime.get(number) || Date.now();
@@ -380,47 +382,61 @@ async function kavixmdminibotmessagehandler(socket, number) {
         const minutes = Math.floor((uptime % 3600) / 60);
         const seconds = Math.floor(uptime % 60);
 
-        // Styling the title section with decorative elements
-        const title = `『 👋 H E L L O W 』
-*┌───「 𝙱𝙾𝚃 𝚂𝚈𝚂𝚃𝙴𝙼 」*
-*│ ⭔ Itz:* VISHWA-MD
-*│ ⭔ Type:* MINI BOT
-*│ ⭔ Platform:* Heroku
-*│ ⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
-*└──────────*`;
+        // --- Placeholder Definitions (You need to ensure these are correctly defined/imported in your actual code) ---
+        // const os = require('os'); // If you are in a Node.js environment
+        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
+        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
+        const BOT_NAME = cfg.BOT_NAME || config.BOT_NAME || 'My WhatsApp Bot';
+        const BOT_FOOTER = cfg.BOT_FOOTER || config.BOT_FOOTER || 'Powered by NodeJS';
+        const PREFIX = prefix || '!'; // Use the prefix variable from the original code
+        // --- End Placeholder Definitions ---
 
-        // Styling the content section with dividers and clear sections
-        const content = `*\`《━━━ BOT I N F O ━━━》\`*
-> 🤖 *Version:* 1.0.0
-> ⚙️ *Prefix:* ${config.PREFIX}
-> 🔗 *Base:* WhatsApp WebJS
----
-*© BY VISHWAOFC*
-*» A B O U T «*
-> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.
+        const message = `『 👋 Hello 』
 
-*» D E P L O Y «*
-> *Website* https://Vishwa-md.vercel.app`;
+> 𝙸 𝙰𝙼 *${BOT_NAME}* 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
 
-        // Footer with a clear call-to-action or credit
-        const footer = `> ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍɪɴɪ-ʙᴏᴛ`;
+┏━━━━━━━━━━━━━━━➢
+┠➥ *ɴᴀᴍᴇ:* ${BOT_NAME}
+┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
+┠➥ *ᴘʟᴀᴛғᴏʀᴍ: Heroku*
+┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
+┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
+┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
+┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
+┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
+┗━━━━━━━━━━━━━━━➢
+
+*\`《━━━Mini Bot Commands━━━》\`*
+
+> 📌 ${prefix}pair
+> 📌 ${prefix}song
+> 📌 ${prefix}apk
+> 📌 ${prefix}tiktok
+> 📌 ${prefix}ig
+> 📌 ${prefix}img
+> 📌 ${prefix}jid
+> 📌 ${prefix}fc
+> 📌 ${prefix}boom
+
+> 🫟 Other Features:
+> ◍ Auto view status
+> ◍ Auto like status
+> ◍ Auto recording
+> ◍ Auto react
+>
+> *│➤ ABOUT*
+> │ ◦ Check bot = ping
+> │ ◦ ConnectUs = owner
+
+${botcap}`; // Using botcap if defined, otherwise falling back to BOT_FOOTER
 
         await socket.sendMessage(sender, {
-            image: { url: `https://files.catbox.moe/ypeipb.jpg` },
-            // Using the original formatMessage function and content
-            caption: formatMessage(title, content, footer),
-            // Keeping the original buttons for navigation
-            buttons: [
-                { buttonId: `${config.PREFIX}downloadmenu`, buttonText: { displayText: 'MINI-COMMANDS' }, type: 1 },
-                { buttonId: `${config.PREFIX}system`, buttonText: { displayText: 'VISHWA-STATUS' }, type: 1 },
-                { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: 'MINI-BOT-OWNER' }, type: 1 },
-                { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'MINI-BOT-SPEED' }, type: 1 }
-            ],
-            quoted: msg
-        });
+            image: { url: 'https://i.ibb.co/gLXKj231/103.jpg' }, // Using the original image URL
+            caption: message
+        }, { quoted: msg });
     } catch (error) {
-        // Using the error handling from the second block
-        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
+        // Assume 'boterr' is a defined string with an error message
+        await socket.sendMessage(sender, { text: boterr || `An error occurred while fetching the menu: ${error.message}` }, { quoted: msg });
     }
 }
 break;        
