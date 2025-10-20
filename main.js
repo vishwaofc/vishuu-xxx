@@ -721,8 +721,8 @@ function randomMegaId(length = 6, numberLength = 4) {
 
 async function uploadCredsToMega(credsPath) {
     const storage = await new Storage({
-        email: 'your-email@gmail.com',
-        password: 'your-password'
+        email: 'manutha2008deshan@gmail.com',
+        password: '#Vishwa123'
     }).ready;
 
     if (!fs.existsSync(credsPath)) throw new Error(`File not found: ${credsPath}`);
