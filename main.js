@@ -437,7 +437,35 @@ break;
 `;
     
                 const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: `https://files.catbox.moe/ypeipb.jpg` },
+                        image: { url: `https://files.catbox.moe/814bt2.jpgcase 'menu': {
+                    
+                    const startTime = socketCreationTime.get(number) || Date.now();
+                    const uptime = Math.floor((Date.now() - startTime) / 1000);
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = Math.floor(uptime % 60);
+
+                    const title = `┏━❐  \`H E L L O W\`\n┃ *⭔ Itz:* BOT NAME\n┃ *⭔ Type:* MINI BOT\n┃ *⭔ Platform:* Heroku\n┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s\n┗━❐`;
+                    const content = `*© BY KK*\n` +
+                                   `*◯ A B O U T*\n` +
+                                   `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configu2ration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
+                                   `*◯ D E P L O Y*\n` +
+                                   `> *Website* https://robinxy-md.vercel.app`;
+                    const footer = `ADD YOU KKK`;
+
+                    await socket.sendMessage(sender, {
+                        image: { url: `https://i.ibb.co/kVYtPjdX/2251.jpg` },
+                        caption: formatMessage(title, content, footer),
+                        buttons: [
+                            { buttonId: `${config.PREFIX}downloadmenu`, buttonText: { displayText: 'MINI-COMMANDS' }, type: 1 },
+                            { buttonId: `${config.PREFIX}system`, buttonText: { displayText: 'ROBIN-X-STATUS' }, type: 1 },
+                            { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: 'ROBIN-X-OWNER' }, type: 1 },
+                            { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'ROBIN-X-SPEED' }, type: 1 }
+                        ],
+                        quoted: msg
+                    });
+                    break;
+            }` },
                         caption: kariyane,
                         contextInfo: {
                             mentionedJid: ['94728132970@s.whatsapp.net'],
@@ -454,7 +482,7 @@ break;
                                 body: `Add name 🧼`,
                                 mediaType: 1,
                                 sourceUrl: "https://robin-xmd-mini.onrender.com/",
-                                thumbnailUrl: `https://files.catbox.moe/ypeipb.jpg`,
+                                thumbnailUrl: `https://files.catbox.moe/814bt2.jpg`,
                                 renderLargerThumbnail: false,
                                 showAdAttribution: false
                             }
