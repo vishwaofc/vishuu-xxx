@@ -284,7 +284,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         let sender = msg.key.remoteJid;
         let PREFIX = ".";
         let botImg = "https://files.catbox.moe/ypeipb.jpg";
-        let devTeam = "";
+        let devTeam = "vishwaofc";
         let botcap = "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍɪɴɪ-ᴡᴀ ʙᴏᴛ";
         let boterr = "An error has occurred, Please try again.";
         let botNumber = await socket.decodeJid(socket.user.id);
@@ -369,79 +369,54 @@ async function kavixmdminibotmessagehandler(socket, number) {
         // Commands(All) Handler - CyberKavi - sell\\
         try {
             switch (command) {
-        case 'menu': {
-    try {
-        // Assume 'socket', 'sender', 'msg', 'number', 'socketCreationTime' are defined in the outer scope
-        // Assume 'os', 'cfg', 'config', 'prefix', 'PREFIX', 'botImg', 'botcap', 'boterr' are defined or imported
+                     case 'menu': {
+          const startTime = socketCreationTime.get(number) || Date.now();
+          const uptime = Math.floor((Date.now() - startTime) / 1000);
+          const hours = Math.floor(uptime / 3600);
+          const minutes = Math.floor((uptime % 3600) / 60);
+          const seconds = Math.floor(uptime % 60);
 
-        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
+          await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
 
-        const startTime = socketCreationTime.get(number) || Date.now();
-        const uptime = Math.floor((Date.now() - startTime) / 1000);
-        const hours = Math.floor(uptime / 3600);
-        const minutes = Math.floor((uptime % 3600) / 60);
-        const seconds = Math.floor(uptime % 60);
+          const menuTxt = `┏━❐  \`ℍ 𝔼 𝕃 𝕃 𝕆\`
+┃ *⭔ Itz:*  *Vishwa-MD-MINI*
+┃ *⭔ Type:* *ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ*
+┃ *⭔ Platform:* Heroku
+┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+┗━❐
 
-        // --- Placeholder Definitions (You need to ensure these are correctly defined/imported in your actual code) ---
-        // const os = require('os'); // If you are in a Node.js environment
-        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
-        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
-        const BOT_NAME = cfg.BOT_NAME || config.BOT_NAME || 'My WhatsApp Bot';
-        const BOT_FOOTER = cfg.BOT_FOOTER || config.BOT_FOOTER || 'Powered by NodeJS';
-        const PREFIX = prefix || '!'; // Use the prefix variable from the original code
-        // --- End Placeholder Definitions ---
+┏━❐
+┃ ⭔| pair
+┃ ⭔| song  
+┃ ⭔| apk  
+┃ ⭔| tiktok  
+┃ ⭔| ig  
+┃ ⭔| img  
+┃ ⭔| jid  
+┃ ⭔| fc  
+┃ ⭔| boom 
+┗━❐
 
-        const message = `『 👋 Hello 』
+🫟 Other Features:
+  ◍ Auto view status
+  ◍ Auto like status
+  ◍ Auto recording
+  ◍ Auto react
+       
+*│➤ ABOUT*
+│ ◦ Check bot = ping
+│ ◦ ConnectUs = owner
 
-> 𝙸 𝙰𝙼 *${BOT_NAME}* 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
+`;
 
-┏━━━━━━━━━━━━━━━➢
-┠➥ *ɴᴀᴍᴇ:* ${BOT_NAME}
-┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
-┠➥ *ᴘʟᴀᴛғᴏʀᴍ: Heroku*
-┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
-┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
-┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
-┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
-┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
-┗━━━━━━━━━━━━━━━➢
-
-*\`《━━━Mini Bot Commands━━━》\`*
-
-> 📌 ${prefix}pair
-> 📌 ${prefix}song
-> 📌 ${prefix}apk
-> 📌 ${prefix}tiktok
-> 📌 ${prefix}ig
-> 📌 ${prefix}img
-> 📌 ${prefix}jid
-> 📌 ${prefix}fc
-> 📌 ${prefix}boom
-
-> 🫟 Other Features:
-> ◍ Auto view status
-> ◍ Auto like status
-> ◍ Auto recording
-> ◍ Auto react
->
-> *│➤ ABOUT*
-> │ ◦ Check bot = ping
-> │ ◦ ConnectUs = owner
-
-${botcap}`; // Using botcap if defined, otherwise falling back to BOT_FOOTER
-
-        await socket.sendMessage(sender, {
-            image: { url: 'https://i.ibb.co/gLXKj231/103.jpg' }, // Using the original image URL
-            caption: message
-        }, { quoted: msg });
-    } catch (error) {
-        // Assume 'boterr' is a defined string with an error message
-        await socket.sendMessage(sender, { text: boterr || `An error occurred while fetching the menu: ${error.message}` }, { quoted: msg });
-    }
-}
-break;        
-
-                case 'ping': {
+          await socket.sendMessage(sender, {
+            image: { url: 'https://files.catbox.moe/ypeipb.jpg' },
+            caption: menuTxt
+          });
+          break;
+       
+        
+case 'ping': {
     try {
         await socket.sendMessage(sender, { react: { text: "⏱️", key: msg.key, }}, { quoted: msg }); // Added reaction
 
