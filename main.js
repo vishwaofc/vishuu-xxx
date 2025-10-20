@@ -436,7 +436,7 @@ break;
 > *©ᴠɪꜱʜᴡᴀ-ᴍᴅ ᴍɪɴɪ ʙᴏᴛ*
 `;
     
-                    const sentMsg = await socket.sendMessage(sender, {
+                const sentMsg = await socket.sendMessage(sender, {
                         image: { url: `https://files.catbox.moe/ypeipb.jpg` },
                         caption: kariyane,
                         contextInfo: {
@@ -450,7 +450,7 @@ break;
           serverMessageId: 999
                             },
                             externalAdReply: {
-                                title: `◉ʀᴏʙɪɴ-x-ᴍɪɴɪ-ʙᴏᴛ◉`,
+                                title: `vishwa-md-mini`,
                                 body: `Add name 🧼`,
                                 mediaType: 1,
                                 sourceUrl: "https://robin-xmd-mini.onrender.com/",
