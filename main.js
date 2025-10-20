@@ -398,6 +398,42 @@ case 'ping': {
     }
 }
 break;
+                     case 'menu': {
+          const startTime = socketCreationTime.get(number) || Date.now();
+          const uptime = Math.floor((Date.now() - startTime) / 1000);
+          const hours = Math.floor(uptime / 3600);
+          const minutes = Math.floor((uptime % 3600) / 60);
+          const seconds = Math.floor(uptime % 60);
+
+          await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
+
+          const menuTxt = `┏━❐  \`ℍ 𝔼 𝕃 𝕃 𝕆\`
+┃ *⭔ Itz:*  *VISHWA-MD-MINI*
+┃ *⭔ Type:* *ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ*
+┃ *⭔ Platform:* Heroku
+┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+┗━❐
+
+┏━❐
+┃ ⭔| pair
+┃ ⭔| song  
+┃ ⭔| apk  
+┃ ⭔| tiktok  
+┃ ⭔| ig  
+┃ ⭔| img  
+┃ ⭔| jid  
+┃ ⭔| fc  
+┃ ⭔| boom 
+┗━❐
+
+`;
+
+        await socket.sendMessage(sender, {
+            image: { url: 'https://i.ibb.co/gLXKj231/103.jpg' },
+            caption: menuTxt
+          });
+          break;
+                     }
                                         
                     
                         
@@ -469,7 +505,7 @@ break;
             location: {
                 degreesLatitude: 37.7749,
                 degreesLongitude: -122.4194,
-                name: 'Robin Address',
+                name: 'vishwa Address',
                 address: 'Nuwaraeliya, SriLanka',
             },
         };
