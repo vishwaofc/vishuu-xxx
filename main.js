@@ -415,21 +415,21 @@ break;
 ┗━❐
 
 ┏━❐
-┃ ⭔| pair
-┃ ⭔| song  
-┃ ⭔| apk  
-┃ ⭔| tiktok  
-┃ ⭔| ig  
-┃ ⭔| img  
-┃ ⭔| jid  
-┃ ⭔| fc  
-┃ ⭔| boom 
+┃ ⭔📌| pair
+┃ ⭔📌| song  
+┃ ⭔📌| apk  
+┃ ⭔📌| tiktok  
+┃ ⭔📌| ig  
+┃ ⭔📌| img  
+┃ ⭔📌| jid  
+┃ ⭔📌| fc  
+┃ ⭔📌| boom 
 ┗━❐
-
+> _ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ ᴍɪɴɪ ʙᴏᴛ_
 `;
 
         await socket.sendMessage(sender, {
-            image: { url: 'https://i.ibb.co/gLXKj231/103.jpg' },
+            image: { url: 'https://files.catbox.moe/ypeipb.jpg' },
             caption: menuTxt
           });
           break;
