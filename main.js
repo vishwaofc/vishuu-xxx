@@ -259,6 +259,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         const owners = [];
         const msgContent = msg.message?.conversation || msg.message?.extendedTextMessage?.text || msg.message?.imageMessage?.caption || msg.message?.videoMessage?.caption || "";
         const text = msg.message.conversation || msg.message.extendedTextMessage?.text || '';
+        
 
         if (owners.includes(jidNumber) || isOwner) {} else {
             switch (setting.worktype) {
@@ -290,7 +291,15 @@ async function kavixmdminibotmessagehandler(socket, number) {
         let botNumber = await socket.decodeJid(socket.user.id);
         let body = msgContent.trim();
         let isCommand = body.startsWith(PREFIX);
-
+const fakeForward = {
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+        newsletterJid: '120363420273361586@newsletter', 
+        newsletterName: 'VISHWA-MD-Mini',
+        serverMessageId: '115'
+    }
+};
         if (isCommand) {
             const parts = body.slice(PREFIX.length).trim().split(/ +/);
             command = parts.shift().toLowerCase();
@@ -444,7 +453,7 @@ ${botcap}`
                         await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
                     } catch (error) {
                         await socket.sendMessage(sender, { text: boterr }, 
-                        {contextInfo: replygckavi,
+                        {contextInfo: fakeForward,
 }, {
 quoted: kxq
 });                        
