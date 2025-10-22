@@ -296,7 +296,15 @@ async function kavixmdminibotmessagehandler(socket, number) {
             command = parts.shift().toLowerCase();
             args = parts;
         }
-
+const fakeForward = {
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+        newsletterJid: '120363420273361586@newsletter', 
+        newsletterName: 'VISHWA-MINI SUPPORT',
+        serverMessageId: '115'
+    }
+};
         const ownerMessage = async () => {
             await socket.sendMessage(sender, {text: `🚫 ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ᴏɴʟʏ ʙᴇ ᴜsᴇᴅ ʙʏ ᴛʜᴇ ᴏᴡɴᴇʀ.`}, { quoted: msg });
         };
@@ -324,6 +332,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         const kavireact = async (remsg) => {
             await socket.sendMessage(sender, { react: { text: remsg, key: msg.key, }}, { quoted: msg });
         };
+    
 
         // Quoted(Settings) Handler - CyberKavi - sell\\
         try {
@@ -375,7 +384,7 @@ case 'ping': {
         await socket.sendMessage(sender, { react: { text: "⏱️", key: msg.key, }}, { quoted: msg }); // Added reaction
 
         const initial = new Date().getTime();
-        let pingMsg = await socket.sendMessage(sender, { text: '*_Pinging to Robin Module..._* ❗' });
+        let pingMsg = await socket.sendMessage(sender, { text: '*_Pinging to Vishwa's Module..._* ❗' });
 
         // Note: The timing calculation should ideally be done *after* the final message is sent to measure the latency more accurately.
         // For a simple 'ping' response time, we'll measure up to the final edit.
