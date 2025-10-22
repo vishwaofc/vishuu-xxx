@@ -283,7 +283,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         let args = [];
         let sender = msg.key.remoteJid;
         let PREFIX = ".";
-        let botImg = "https://ibb.co/hR6S67jd";
+        let botImg = "https://postimg.cc/ppKTfhPM";
         let devTeam = "vishwaofc";
         let botcap = "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍɪɴɪ-ᴡᴀ ʙᴏᴛ";
         let boterr = "An error has occurred, Please try again.";
