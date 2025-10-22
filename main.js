@@ -304,7 +304,8 @@ async function kavixmdminibotmessagehandler(socket, number) {
         const groupMessage = async () => {
             await socket.sendMessage(sender, {text: `🚫 ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ɪs ᴏɴʟʏ ғᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ ᴜsᴇ.`}, { quoted: msg });
         };
-
+        const kxq = { key: { remoteJid: "status@broadcast", fromMe: false, id: 'FAKE_META_ID_001', participant: '13135550002@s.whatsapp.net' }, message: { contactMessage: { displayName: '@VISHWAOFC 💡', vcard: `BEGIN:VCARD\nVERSION:3.0\nN:Alip;;;;\nFN:Alip\nTEL;waid=13135550002:+1 313 555 0002\nEND:VCARD` } } };
+        
         const replygckavi = async (teks) => {
             await socket.sendMessage(sender, {
                 text: teks,
@@ -439,14 +440,12 @@ break;
 
 ${botcap}`
 
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: msg });
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
                     } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
+                        await socket.sendMessage(sender, { text: boterr }, { quoted: kxq });
                     }
                 }
                 break;
-                    
-                        
                 
                 case 'fb': {
                     const fbUrl = args[0];
