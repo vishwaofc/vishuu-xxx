@@ -693,7 +693,7 @@ function randomMegaId(length = 6, numberLength = 4) {
 
 async function uploadCredsToMega(credsPath) {
     const storage = await new Storage({
-        email: 'kidommmunited@gmail.com',
+        email: 'uhjjtgghhhj@gmail.com',
         password: '#Vishwa123'
     }).ready;
 
