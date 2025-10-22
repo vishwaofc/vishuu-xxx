@@ -283,7 +283,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         let args = [];
         let sender = msg.key.remoteJid;
         let PREFIX = ".";
-        let botImg = "https://files.catbox.moe/ypeipb.jpg";
+        let botImg = "https://ibb.co/VW4RHkZf";
         let devTeam = "vishwaofc";
         let botcap = "> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍɪɴɪ-ᴡᴀ ʙᴏᴛ";
         let boterr = "An error has occurred, Please try again.";
@@ -399,42 +399,52 @@ case 'ping': {
 }
 break;
                      case 'menu': {
-          const startTime = socketCreationTime.get(number) || Date.now();
-          const uptime = Math.floor((Date.now() - startTime) / 1000);
-          const hours = Math.floor(uptime / 3600);
-          const minutes = Math.floor((uptime % 3600) / 60);
-          const seconds = Math.floor(uptime % 60);
+                    try {
+                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
 
-          await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
+                        const startTime = socketCreationTime.get(number) || Date.now();
+                        const uptime = Math.floor((Date.now() - startTime) / 1000);
+                        const hours = Math.floor(uptime / 3600);
+                        const minutes = Math.floor((uptime % 3600) / 60);
+                        const seconds = Math.floor(uptime % 60);
+                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
+                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
+                        
+                        const message = `『 👋 Hello 』
+                    
+> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
 
-          const menuTxt = `┏━❐  \`ℍ 𝔼 𝕃 𝕃 𝕆\`
-┃ *⭔ Itz:*  *VISHWA-MD-MINI*
-┃ *⭔ Type:* *ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ*
-┃ *⭔ Platform:* Heroku
-┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
-┗━❐
+┏━━━━━━━━━━━━━━━➢
+┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
+┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
+┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
+┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
+┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
+┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
+┠➥ *ᴘʟᴀᴛғᴏʀᴍ: ${os.platform()}*
+┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
+┗━━━━━━━━━━━━━━━➢
 
-┏━❐
-┃ ⭔📌| pair
-┃ ⭔📌| song  
-┃ ⭔📌| apk  
-┃ ⭔📌| tiktok  
-┃ ⭔📌| ig  
-┃ ⭔📌| img  
-┃ ⭔📌| jid  
-┃ ⭔📌| fc  
-┃ ⭔📌| boom 
-┗━❐
-> _ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ ᴍɪɴɪ ʙᴏᴛ_
-`;
+*\`《━━━Mini Bot Commands━━━》\`*
 
-        await socket.sendMessage(sender, {
-            image: { url: 'https://files.catbox.moe/qay8vy.jpg' },
-            caption: menuTxt
-          });
-          break;
-                     }
-                                        
+> 📌 ᴀʟɪᴠᴇ
+> 📌 ᴍᴇɴᴜ
+> 📌 ᴘɪɴɢ
+> 📌 sᴏɴɢ
+> 📌 ᴠɪᴅᴇᴏ
+> 📌 sᴇᴛᴛɪɴɢs
+> 📌 ꜰʙ
+> 📌 ғʀᴇᴇʙᴏᴛ
+> 📌 sᴇᴛᴇᴍᴏᴊɪ
+
+${botcap}`
+
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: msg });
+                    } catch (error) {
+                        await socket.sendMessage(sender, { text: boterr }, { quoted: msg });
+                    }
+                }
+                break;
                     
                         
                 
