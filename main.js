@@ -291,6 +291,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
         let botNumber = await socket.decodeJid(socket.user.id);
         let body = msgContent.trim();
         let isCommand = body.startsWith(PREFIX);
+        
 const fakeForward = {
     forwardingScore: 1,
     isForwarded: true,
@@ -452,8 +453,7 @@ ${botcap}`
 
                         await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: fakeForward });
                     } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, 
-                        {contextInfo: fakeForward}, {quoted: kxq});                        
+                        await socket.sendMessage(sender, { text: boterr }, {contextInfo: fakeForward }, {quoted: kxq});                        
                     }
                 }
                 break;
