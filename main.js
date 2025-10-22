@@ -451,11 +451,14 @@ ${botcap}`
 
                         await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
                     } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, { quoted: kxq });
+                        await socket.sendMessage(sender, { text: boterr }, 
+                        {contextInfo: fakeForward,
+}, {
+quoted: kxq
+});                        
                     }
                 }
                 break;
-                
                 case 'fb': {
                     const fbUrl = args[0];
                     if (!fbUrl) return await replygckavi("🚫 Please provide a valid Facebook URL.");
