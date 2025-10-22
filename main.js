@@ -296,15 +296,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
             command = parts.shift().toLowerCase();
             args = parts;
         }
-const fakeForward = {
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363420273361586@newsletter', 
-        newsletterName: 'VISHWA-MINI SUPPORT',
-        serverMessageId: '115'
-    }
-};
+
         const ownerMessage = async () => {
             await socket.sendMessage(sender, {text: `🚫 ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ᴏɴʟʏ ʙᴇ ᴜsᴇᴅ ʙʏ ᴛʜᴇ ᴏᴡɴᴇʀ.`}, { quoted: msg });
         };
@@ -452,7 +444,7 @@ ${botcap}`
                         await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
                     } catch (error) {
                         await socket.sendMessage(sender, { text: boterr }, 
-                        {contextInfo: fakeForward,
+                        {contextInfo: replygckavi,
 }, {
 quoted: kxq
 });                        
