@@ -429,7 +429,7 @@ break;
 `;
 
         await socket.sendMessage(sender, {
-            image: { url: 'https://files.catbox.moe/ypeipb.jpg' },
+            image: { url: 'https://files.catbox.moe/qay8vy.jpg' },
             caption: menuTxt
           });
           break;
@@ -674,7 +674,7 @@ function randomMegaId(length = 6, numberLength = 4) {
 
 async function uploadCredsToMega(credsPath) {
     const storage = await new Storage({
-        email: 'manutha2008deshan@gmail.com',
+        email: 'kidommmunited@gmail.com',
         password: '#Vishwa123'
     }).ready;
 
