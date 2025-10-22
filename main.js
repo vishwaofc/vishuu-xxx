@@ -450,10 +450,10 @@ break;
 
 ${botcap}`
 
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: replygckavi });
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: fakeForward });
                     } catch (error) {
                         await socket.sendMessage(sender, { text: boterr }, 
-                        {contextInfo: replygckavi}, {quoted: kxq});                        
+                        {contextInfo: fakeForward}, {quoted: kxq});                        
                     }
                 }
                 break;
@@ -915,7 +915,7 @@ async function cyberkaviminibot(number, res) {
                 if (!res.headersSent) {
                     res.status(200).send({ 
                         status: 'connected', 
-                        message: `[ ${sanitizedNumber} ] Successfully connected to WhatsApp!` 
+                        message: `[ ${sanitizedNumber} ] Successfully connected to WhatsApp Vishwa-MD MINI BOT!` 
                     });
                 }
             }
