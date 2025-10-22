@@ -376,7 +376,7 @@ case 'ping': {
         await socket.sendMessage(sender, { react: { text: "⏱️", key: msg.key, }}, { quoted: msg }); // Added reaction
 
         const initial = new Date().getTime();
-        let pingMsg = await socket.sendMessage(sender, { text: '*_Pinging to Vishwa's Module..._* ❗' });
+        let pingMsg = await socket.sendMessage(sender, { text: '*_Pinging to Vishwas Module..._* ❗' });
 
         // Note: The timing calculation should ideally be done *after* the final message is sent to measure the latency more accurately.
         // For a simple 'ping' response time, we'll measure up to the final edit.
