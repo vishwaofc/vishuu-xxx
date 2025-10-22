@@ -450,7 +450,7 @@ break;
 
 ${botcap}`
 
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: fakeForward });
                     } catch (error) {
                         await socket.sendMessage(sender, { text: boterr }, 
                         {contextInfo: fakeForward,
