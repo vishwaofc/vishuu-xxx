@@ -451,9 +451,14 @@ break;
 
 ${botcap}`
 
-                        await socket.sendMessage(sender
+                   await socket.sendMessage(sender
 { image: { url: botImg }, caption: message, contextInfo: fakeForward, }, { quoted: kxp
 });
+ catch (error) {
+     await socket.sendMessage(sender
+{ image: { url: botImg }, caption: message, contextInfo: fakeForward, }, { quoted: kxp
+});
+                }
                 break;
                 case 'fb': {
                     const fbUrl = args[0];
