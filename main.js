@@ -451,13 +451,10 @@ break;
 
 ${botcap}`
 
-                   await socket.sendMessage(sender
-{ image: { url: botImg }, caption: message, contextInfo: fakeForward, }, { quoted: kxp
-});
- catch (error) {
-     await socket.sendMessage(sender
-{ image: { url: botImg }, caption: message, contextInfo: fakeForward, }, { quoted: kxp
-});
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message,contextInfo: Fakeforward }, { quoted: kxq } );
+                    } catch (error) {
+                        await socket.sendMessage(sender, { text: boterr }, {contextInfo: fakeForward}, {quoted: kxq});                        
+                    }
                 }
                 break;
                 case 'fb': {
