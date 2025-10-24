@@ -451,9 +451,9 @@ break;
 
 ${botcap}`
 
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: fakeForward });
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: replygckavi });
                     } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, {contextInfo: fakeForward }, {quoted: kxq});                        
+                        await socket.sendMessage(sender, { text: boterr }, {contextInfo: replygckavi }, {quoted: kxq});                        
                     }
                 }
                 break;
@@ -538,7 +538,7 @@ case 'csong': {
             if (metadata?.name) {
                 channelname = metadata.name;
             }
-        } catch (err) {
+        } catch (error) {
             // Ignore metadata errors and keep targetJid as the name fallback
         }
 
@@ -576,7 +576,7 @@ case 'csong': {
             text: `✅ *"${result.title}"* Successfully sent to *${channelname}* (${targetJid}) 😎🎶`,
         });
 
-    } catch (e) {
+    } catch (error) {
         // Use replygckavi for error reporting, matching the first block's style
         // console.error(e); // for debugging
         await replygckavi("🚫 Something went wrong.");
@@ -629,6 +629,12 @@ break;                        }
     }
 }
 break;
+            case 'jid': {
+                    await socket.sendMessage(sender, {
+                        text: `*🆔 Chat JID:* ${sender}`
+                    });
+                    break;
+            }
 
                 case 'settings': case "setting": case "set": {
                     if (!isOwner) return await replygckavi('🚫 Only owner can use this command.');
