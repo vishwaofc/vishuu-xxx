@@ -495,6 +495,88 @@ ${botcap}`
                     }
                 }
                 break;
+                    case 'csend':
+case 'csong': {
+try {
+const q = args.join(" ");
+if (!q) {
+return reply("*ඔයාලා ගීත නමක් හෝ YouTube ලින්ක් එකක් දෙන්න...!*");
+}
+
+const targetJid = args[0];
+const query = args.slice(1).join(" ");
+
+if (!targetJid || !query) {
+return reply("*❌ Format එක වැරදියි! Use:* `.csong <jid> <song name>`");
+}
+
+const yts = require("yt-search");
+const search = await yts(query);
+
+if (!search.videos.length) {
+return reply("*ගීතය හමුනොවුණා... ❌*");
+}
+
+const data = search.videos[0];
+const ytUrl = data.url;
+const ago = data.ago;
+
+const axios = require("axios");
+const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${ytUrl}&format=mp3&apikey=sadiya`;
+const { data: apiRes } = await axios.get(api);
+
+if (!apiRes?.status || !apiRes.result?.download) {
+return reply("❌ ගීතය බාගත කළ නොහැක. වෙනත් එකක් උත්සහ කරන්න!");
+}
+
+const result = apiRes.result;
+
+let channelname = targetJid;
+try {
+const metadata = await socket.newsletterMetadata("jid", targetJid);
+if (metadata?.name) {
+channelname = metadata.name;
+}
+} catch (error) {
+//   console.error("Newsletter metadata error:", err);
+}
+
+const caption = `☘️ ᴛɪᴛʟᴇ : ${data.title} 🙇‍♂️🫀🎧
+
+❒ *🎭 Vɪᴇᴡꜱ :* ${data.views}
+❒ *⏱️ Dᴜʀᴀᴛɪᴏɴ :* ${data.timestamp}
+❒ *📅 Rᴇʟᴇᴀꜱᴇ Dᴀᴛᴇ :* ${ago}
+
+*00:00 ───●────────── ${data.timestamp}*
+
+* *ලස්සන රියැක්ට් ඕනී ...💗😽🍃*
+
+> *${channelname}*`;
+
+
+await socket.sendMessage(targetJid, {
+image: { url: result.thumbnail },
+caption: caption,
+});
+
+await new Promise(resolve => setTimeout(resolve, 30000));
+
+await socket.sendMessage(targetJid, {
+audio: { url: result.download },
+mimetype: "audio/mpeg",
+ptt: true,
+});
+
+await socket.sendMessage(sender, {
+text: `✅ *"${result.title}"* Successfully sent to *${channelname}* (${targetJid}) 😎🎶`,
+});
+
+} catch (error) {
+//   console.error(e);
+reply("*ඇතැම් දෝෂයකි! පසුව නැවත උත්සහ කරන්න.*");
+}
+break;
+                            }
                     
                 case 'owner': {
     try {
