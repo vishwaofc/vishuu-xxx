@@ -497,55 +497,57 @@ ${botcap}`
                 break;
                     case 'csend':
 case 'csong': {
-try {
-const q = args.join(" ");
-if (!q) {
-return reply("*ඔයාලා ගීත නමක් හෝ YouTube ලින්ක් එකක් දෙන්න...!*");
-}
+    try {
+        // Check for required arguments
+        if (args.length < 2) {
+            // Use the language and helper function from the first block's style
+            return await replygckavi("🚫 Please provide a target JID and a search query. Example: `.csong <jid> <song name>`");
+        }
 
-const targetJid = args[0];
-const query = args.slice(1).join(" ");
+        const targetJid = args[0];
+        const query = args.slice(1).join(" ");
 
-if (!targetJid || !query) {
-return reply("*❌ Format එක වැරදියි! Use:* `.csong <jid> <song name>`");
-}
+        // Check if query is empty after slicing
+        if (!query) {
+            return await replygckavi("🚫 Please provide a search query.");
+        }
 
-const yts = require("yt-search");
-const search = await yts(query);
+        // Assume yts and axios are globally available or required earlier
+        const search = await yts(query);
 
-if (!search.videos.length) {
-return reply("*ගීතය හමුනොවුණා... ❌*");
-}
+        if (!search.videos.length) {
+            return await replygckavi("🚫 No results found.");
+        }
 
-const data = search.videos[0];
-const ytUrl = data.url;
-const ago = data.ago;
+        const data = search.videos[0];
+        const ytUrl = data.url;
 
-const axios = require("axios");
-const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${ytUrl}&format=mp3&apikey=sadiya`;
-const { data: apiRes } = await axios.get(api);
+        const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${encodeURIComponent(ytUrl)}&format=mp3&apikey=sadiya`;
+        const { data: apiRes } = await axios.get(api);
 
-if (!apiRes?.status || !apiRes.result?.download) {
-return reply("❌ ගීතය බාගත කළ නොහැක. වෙනත් එකක් උත්සහ කරන්න!");
-}
+        if (!apiRes?.status || !apiRes.result?.download) {
+            return await replygckavi("🚫 Something went wrong during download.");
+        }
 
-const result = apiRes.result;
+        const result = apiRes.result;
+        let channelname = targetJid;
+        
+        // Attempt to fetch channel name (optional, keep only if newsletterMetadata is needed)
+        try {
+            const metadata = await socket.newsletterMetadata("jid", targetJid);
+            if (metadata?.name) {
+                channelname = metadata.name;
+            }
+        } catch (err) {
+            // Ignore metadata errors and keep targetJid as the name fallback
+        }
 
-let channelname = targetJid;
-try {
-const metadata = await socket.newsletterMetadata("jid", targetJid);
-if (metadata?.name) {
-channelname = metadata.name;
-}
-} catch (err) {
-//   console.error("Newsletter metadata error:", err);
-}
-
-const caption = `☘️ ᴛɪᴛʟᴇ : ${data.title} 🙇‍♂️🫀🎧
+        // Caption using details from both search result (data) and API result (result)
+        const caption = `☘️ ᴛɪᴛʟᴇ : ${data.title} 🙇‍♂️🫀🎧
 
 ❒ *🎭 Vɪᴇᴡꜱ :* ${data.views}
 ❒ *⏱️ Dᴜʀᴀᴛɪᴏɴ :* ${data.timestamp}
-❒ *📅 Rᴇʟᴇᴀꜱᴇ Dᴀᴛᴇ :* ${ago}
+❒ *📅 Rᴇʟᴇᴀꜱᴇ Dᴀᴛᴇ :* ${data.ago}
 
 *00:00 ───●────────── ${data.timestamp}*
 
@@ -553,30 +555,34 @@ const caption = `☘️ ᴛɪᴛʟᴇ : ${data.title} 🙇‍♂️🫀🎧
 
 > *${channelname}*`;
 
+        // 1. Send thumbnail/caption to targetJid
+        await socket.sendMessage(targetJid, {
+            image: { url: result.thumbnail },
+            caption: caption,
+        });
+        
+        // Keep the delay from the original csend/csong block
+        await new Promise(resolve => setTimeout(resolve, 30000));
 
-await socket.sendMessage(targetJid, {
-image: { url: result.thumbnail },
-caption: caption,
-});
+        // 2. Send audio file to targetJid (using ptt: true as in the csend block)
+        await socket.sendMessage(targetJid, {
+            audio: { url: result.download },
+            mimetype: "audio/mpeg",
+            ptt: true,
+        });
 
-await new Promise(resolve => setTimeout(resolve, 30000));
+        // 3. Send confirmation to the sender (sender)
+        await socket.sendMessage(sender, {
+            text: `✅ *"${result.title}"* Successfully sent to *${channelname}* (${targetJid}) 😎🎶`,
+        });
 
-await socket.sendMessage(targetJid, {
-audio: { url: result.download },
-mimetype: "audio/mpeg",
-ptt: true,
-});
-
-await socket.sendMessage(sender, {
-text: `✅ *"${result.title}"* Successfully sent to *${channelname}* (${targetJid}) 😎🎶`,
-});
-
-} catch (e) {
-//   console.error(e);
-reply("*ඇතැම් දෝෂයකි! පසුව නැවත උත්සහ කරන්න.*");
+    } catch (e) {
+        // Use replygckavi for error reporting, matching the first block's style
+        // console.error(e); // for debugging
+        await replygckavi("🚫 Something went wrong.");
+    }
 }
-break;
-                        }
+break;                        }
                 case 'owner': {
     try {
         await socket.sendMessage(sender, { 
