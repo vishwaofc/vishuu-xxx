@@ -506,6 +506,32 @@ ${botcap}`
                     }
                 }
                 break;
+                     case 'alive': {
+                    const startTime = socketCreationTime.get(number) || Date.now();
+                    const uptime = Math.floor((Date.now() - startTime) / 1000);
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = Math.floor(uptime % 60);
+
+                    const title = '🪨 Hellow, *"Itz: ROBIN-XMD MINI"*';
+                    const content = `*© bY|* Vishwa Ofc\n` +                                   `*◯ A B O U T*\n` +
+                                   `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
+                                   `*◯ D E P L O Y*\n` +
+                                   `> *Webiste* https://vishwamini.vercel.app`;
+                
+
+                    await socket.sendMessage(sender, {
+                        image: { url: botImg },
+                        caption: formatMessage(title, content, footer),
+                        buttons: [
+                            { buttonId: `${PREFIX}owner`, buttonText: { displayText: 'BOT-OWNER' }, type: 1 },
+                            { buttonId: `${PREFIX}menu`, buttonText: { displayText: 'BOT-MENU' }, type: 1 }
+                        ],
+                        quoted: msg
+                    });
+                    break;
+                }
+//==============================
                  case 'img': {
     const axios = require("axios");
 
