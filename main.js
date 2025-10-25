@@ -495,88 +495,81 @@ ${botcap}`
                     }
                 }
                 break;
-                    case 'csend':
-case 'csong': {
-try {
-const q = args.join(" ");
-if (!q) {
-return reply("*ඔයාලා ගීත නමක් හෝ YouTube ලින්ක් එකක් දෙන්න...!*");
+                 case 'img': {
+    const axios = require("axios");
+
+    const q = msg.message?.conversation || 
+              msg.message?.extendedTextMessage?.text || 
+              msg.message?.imageMessage?.caption || 
+              msg.message?.videoMessage?.caption || '';
+
+    if (!q || q.trim() === '') {
+        return await socket.sendMessage(sender, { text: '*`Need search keywords`*' });
+    }
+
+    const query = q.trim();
+
+    try {
+        // 🧠 Inline footer fetch from MongoDB
+        const sanitizedNumber = number.replace(/[^0-9]/g, '');
+
+        await socket.sendMessage(sender, { text: `🔍 *Searching images for "${query}"...*` });
+
+        const url = `https://apis.davidcyriltech.my.id/googleimage?query=${encodeURIComponent(query)}`;
+        const response = await axios.get(url);
+
+        // Validate response
+        if (!response.data?.success || !response.data.results?.length) {
+            return await socket.sendMessage(sender, { text: '*`No images found`*' });
+        }
+
+        const results = response.data.results;
+        // Get 5 random images
+        const selectedImages = results
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 5);
+
+        const desc = `
+🖼️ *𝚂𝚎𝚊𝚛𝚌𝚑 𝚁𝚎𝚜𝚞𝚕𝚝 :* \`${query}\`
+
+◆📊 *𝚃𝚘𝚝𝚊𝚕 𝚁𝚎𝚜𝚞𝚕𝚝𝚜* : ${results.length}
+
+◆🎯 *𝚂𝚎𝚕𝚎𝚌𝚝𝚎𝚍* : ${selectedImages.length} images
+
+📌. 𝗨𝗽𝗹𝗼𝗮𝗱 𝗙𝗿𝗼𝗺 𝗚𝗼𝗼𝗴𝗹𝗲
+
+> *© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠɪꜱʜᴡᴀ-ᴍᴅ ᴍɪɴɪ ʙᴏᴛ*
+`;
+
+        await socket.sendMessage(sender, {
+            image: { url: selectedImages[0] },
+            caption: desc,
+        }, { quoted: msg });
+
+        await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
+
+        // Send remaining images
+        for (let i = 1; i < selectedImages.length; i++) {
+            await socket.sendMessage(sender, {
+                image: { url: selectedImages[i] },
+                caption: `📷 *Image ${i + 1}/${selectedImages.length}*\n\n> *© ʀᴏʙɪɴ x-ᴍɪɴɪ ʙᴏᴛ*`
+            }, { quoted: msg });
+            
+            // Add delay between sends to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        await socket.sendMessage(sender, { react: { text: '⬆️', key: msg.key } });
+
+    } catch (error) {
+        console.error(err);
+        await socket.sendMessage(sender, { text: "*`Error occurred while searching images`*" });
+    }
+
+    break;
 }
+   
 
-const targetJid = args[0];
-const query = args.slice(1).join(" ");
-
-if (!targetJid || !query) {
-return reply("*❌ Format එක වැරදියි! Use:* `.csong <jid> <song name>`");
-}
-
-const yts = require("yt-search");
-const search = await yts(query);
-
-if (!search.videos.length) {
-return reply("*ගීතය හමුනොවුණා... ❌*");
-}
-
-const data = search.videos[0];
-const ytUrl = data.url;
-const ago = data.ago;
-
-const axios = require("axios");
-const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${ytUrl}&format=mp3&apikey=sadiya`;
-const { data: apiRes } = await axios.get(api);
-
-if (!apiRes?.status || !apiRes.result?.download) {
-return reply("❌ ගීතය බාගත කළ නොහැක. වෙනත් එකක් උත්සහ කරන්න!");
-}
-
-const result = apiRes.result;
-
-let channelname = targetJid;
-try {
-const metadata = await socket.newsletterMetadata("jid", targetJid);
-if (metadata?.name) {
-channelname = metadata.name;
-}
-} catch (error) {
-//   console.error("Newsletter metadata error:", err);
-}
-
-const caption = `☘️ ᴛɪᴛʟᴇ : ${data.title} 🙇‍♂️🫀🎧
-
-❒ *🎭 Vɪᴇᴡꜱ :* ${data.views}
-❒ *⏱️ Dᴜʀᴀᴛɪᴏɴ :* ${data.timestamp}
-❒ *📅 Rᴇʟᴇᴀꜱᴇ Dᴀᴛᴇ :* ${ago}
-
-*00:00 ───●────────── ${data.timestamp}*
-
-* *ලස්සන රියැක්ට් ඕනී ...💗😽🍃*
-
-> *${channelname}*`;
-
-
-await socket.sendMessage(targetJid, {
-image: { url: result.thumbnail },
-caption: caption,
-});
-
-await new Promise(resolve => setTimeout(resolve, 30000));
-
-await socket.sendMessage(targetJid, {
-audio: { url: result.download },
-mimetype: "audio/mpeg",
-ptt: true,
-});
-
-await socket.sendMessage(sender, {
-text: `✅ *"${result.title}"* Successfully sent to *${channelname}* (${targetJid}) 😎🎶`,
-});
-
-} catch (error) {
-//   console.error(e);
-reply("*ඇතැම් දෝෂයකි! පසුව නැවත උත්සහ කරන්න.*");
-}
-break;
-                            }
                     
                 case 'owner': {
     try {
