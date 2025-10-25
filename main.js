@@ -624,6 +624,82 @@ break;
     }
 }
 break;
+                    case 'tiktok': {
+    const axios = require('axios');
+
+    // Helper function to send text replies (simulating replygckavi/reply)
+    const reply = async (text) => {
+        return await socket.sendMessage(sender, { text });
+    };
+
+    try {
+        const q = msg.message?.conversation || 
+                  msg.message?.extendedTextMessage?.text || 
+                  msg.message?.imageMessage?.caption || 
+                  msg.message?.videoMessage?.caption || '';
+
+        // 1. Input Validation
+        if (!q || q.trim() === '') {
+            return await reply("🚫 *Please provide a TikTok video link.*");
+        }
+
+        const url = q.trim();
+
+        if (!/tiktok\.com/.test(url)) {
+            return await reply("🚫 *Invalid TikTok link.*");
+        }
+
+        await reply("⬇️ *Downloading video, please wait...*");
+        await socket.sendMessage(sender, { react: { text: '⬇️', key: msg.key } });
+
+        // 2. API Call
+        const apiUrl = `https://delirius-apiofc.vercel.app/download/tiktok?url=${encodeURIComponent(url)}`;
+        const { data } = await axios.get(apiUrl, { timeout: 20000 });
+
+        // 3. Data Validation
+        if (!data?.status || !data?.data) {
+            return await reply("🚫 *Failed to fetch TikTok video.*");
+        }
+
+        const { title, like, comment, share, author, meta } = data.data;
+        const media = meta?.media || [];
+        const video = media.find(v => v.type === 'video');
+        const videoUrl = video?.org || video?.url || video?.play;
+
+        if (!videoUrl) {
+            return await reply("🚫 *Could not find a downloadable video stream.*");
+        }
+
+        // 4. Send Media & Caption
+        const desc = `
+🎵 *𝚃𝚒𝚔𝚃𝚘𝚔 𝚅𝚒𝚍𝚎𝚘* 🎵
+
+👤 *𝚄𝚜𝚎𝚛 :* \`${author?.nickname || '-'}\` (@${author?.username || '-'})
+
+📖 *𝚃𝚒𝚝𝚕𝚎 :* \`${title || '-'}\`
+
+👍 *𝙻𝚒𝚔𝚎𝚜 :* ${like || 0}
+💬 *𝙲𝚘𝚖𝚖𝚎𝚗𝚝𝚜 :* ${comment || 0}
+🔁 *𝚂𝚑𝚊𝚛𝚎𝚜 :* ${share || 0}
+
+> *© ᴠɪꜱʜᴡᴀ-ᴍᴅ ᴍɪɴɪ ʙᴏᴛ*
+`;
+
+        await socket.sendMessage(sender, {
+            video: { url: videoUrl },
+            caption: desc,
+        }, { quoted: msg });
+
+        await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+
+    } catch (error) {
+        console.error('Error in TikTok downloader:', err);
+        // Use the reply function for consistent error messaging
+        await reply("🚫 *Error occurred while downloading TikTok video.*");
+    }
+
+    break;
+                                                 }
                     case 'song': case 'yta': {
                     try {
                         const q = args.join(" ");
