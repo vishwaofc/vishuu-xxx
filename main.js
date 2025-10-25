@@ -422,61 +422,82 @@ break;
                         const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
                         const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
                         
-                        const message = `『 👋 Hello 』
-                    
-> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
+                        const kariyane = `┏━❐  \`ᴀʟʟ ᴍᴇɴᴜ\`
+┃ *⭔ ʙᴏᴛ ɴᴀᴍᴇ - ᴋɪɴɢ ᴘᴏᴅᴅᴀ ᴍɪɴᴋ ᴠ1*
+┃ *⭔ ᴘʟᴀᴛꜰʀᴏᴍ - Heroku*
+┃ *⭔ ᴜᴘᴛɪᴍᴇ:* ${hours}h ${minutes}m ${seconds}s
+┗━❐
 
-┏━━━━━━━━━━━━━━━➢
-┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
-┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
-┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
-┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
-┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
-┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
-┠➥ *ᴘʟᴀᴛғᴏʀᴍ: ${os.platform()}*
-┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
-┗━━━━━━━━━━━━━━━➢
+╭─═❮ ⚡ ʙᴏᴛ ᴍᴇɴᴜ ⚡ ❯═━───❖
+┣📌 𝑺ʏꜱᴛᴇᴍ
+*│ 🟢 .ᴀʟɪᴠᴇ →*
+┣ ʙᴏᴛ ᴏɴʟɪɴᴇ ᴄʜᴇᴄᴋ
+*│ 📶 .ᴘɪɴɢ →*
+┣ ꜱᴘᴇᴇᴅ ᴛᴇꜱᴛ
+*│ ⚙️ .ꜱʏꜱᴛᴇᴍ →*
+┣ ʙᴏᴛ ꜱʏꜱᴛᴇᴍ ɪɴꜰᴏ
+*│ 👑 .ᴏᴡɴᴇʀ →*
+┣ ꜱʜᴏᴡ ʙᴏᴛ ᴏᴡɴᴇʀꜱ
+┢━━━━━━━━━━━━━━━━━━━━➢
+┡🎵 𝑴ᴇᴅɪᴀ
+*│ 🎼 .ꜱᴏɴɢ <ɴᴀᴍᴇ>  →*
+┣ ᴅᴏᴡɴʟᴏᴀᴅ ꜱᴏɴɢ
+*│ 📘 .ꜰʙ <ᴜʀʟ> →*
+┣ ꜰᴀᴄᴇʙᴏᴏᴋ ᴠɪᴅᴇᴏ ᴅᴏᴡɴ
+*│ 🎶 .ᴛɪᴋᴛᴏᴋꜱᴇᴀʀᴄʜ <ɴᴀᴍᴇ> →*
+┣  ꜱᴇᴀʀᴄʜ ᴛɪᴋᴛᴏᴋ
+*│ 🎵 .ᴛɪᴋᴛᴏᴋ <ᴜʀʟ> →*
+┣ ᴛɪᴋᴛᴏᴋ ᴅʟ
+*│ 📲 .ᴀᴘᴋ <ɴᴀᴍᴇ> →*
+┣ ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ
+┢━━━━━━━━━━━━━━━━━━━━➢
+┡🛠 𝑻ᴏᴏʟꜱ
+*│ 📦 .ɴᴘᴍ <ᴘᴀᴄᴋᴀɢᴇ> →*
+┣ ɢᴇᴛ ɴᴘᴍ ɪɴꜰᴏ
+*│ 🔍 .ɢᴏᴏɢʟᴇ <ǫᴜᴇʀʏ> →*
+┣ ɢᴏᴏɢʟᴇ ꜱᴇᴀʀᴄʜ
+*│ 🤖 .ᴀɪ <ᴘʀᴏᴍᴘᴛ> →*
+┣ ᴄʜᴀᴛ ᴡɪᴛʜ ᴀɪ
+*│ 🖼️ .ɢᴇᴛᴅᴘ <ᴊɪᴅ> →*
+┣ ɢᴇᴛ ᴘʀᴏꜰɪʟᴇ ᴘɪᴄ
+*│ 💥 .ʙᴏᴏᴍ <ɴᴜᴍ|ᴄᴏᴜɴᴛ> →*
+┣ ʙᴏᴏᴍ ɴᴜᴍʙᴇʀ
+┢━━━━━━━━━━━━━━━━━━━━➢
+┡🔗 𝑾ʜᴀᴛꜱᴀᴘᴘ
+*│ 🔗 .ᴘᴀɪʀ <ᴄᴏᴅᴇ> →*
+┣ ᴘᴀɪʀ ꜱᴇꜱꜱɪᴏɴ
+*│ 🆔 .ᴊɪᴅ →*
+┣ ɢᴇᴛ ᴄʜᴀᴛ ᴊɪᴅ
+*│ 📡 .ᴄɪᴅ <ʟɪɴᴋ> →* 
+┣ ɢᴇᴛ ᴄʜᴀɴɴᴇʟ ɪɴꜰᴏ
+╰━━━━━━━━━━━━━━━━━━━┈⊷`;
 
-*\`《━━━Mini Bot Commands━━━》\`*
-
-> 📌 ᴀʟɪᴠᴇ
-> 📌 ᴍᴇɴᴜ
-> 📌 ᴘɪɴɢ
-> 📌 sᴏɴɢ
-> 📌 ᴠɪᴅᴇᴏ
-> 📌 sᴇᴛᴛɪɴɢs
-> 📌 ꜰʙ
-> 📌 ғʀᴇᴇʙᴏᴛ
-> 📌 sᴇᴛᴇᴍᴏᴊɪ
-
-${botcap}`
-
-                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq }, { contextInfo: replygckavi });
-                    } catch (error) {
-                        await socket.sendMessage(sender, { text: boterr }, {contextInfo: replygckavi }, {quoted: kxq});                        
-                    }
-                }
-                break;
-                case 'fb': {
-                    const fbUrl = args[0];
-                    if (!fbUrl) return await replygckavi("🚫 Please provide a valid Facebook URL.");
-
-                    const apiUrl = `https://sadiya-tech-apis.vercel.app/download/fbdl?url=${encodeURIComponent(fbUrl)}&apikey=sadiya`;
-                    const { data: apiRes } = await axios.get(apiUrl);
-
-                    if (!apiRes?.status || !apiRes?.result) {
-                        return await replygckavi("🚫 Something went wrong.");
-                    }
-
-                    const download_URL = apiRes.result.hd ? apiRes.result.hd : apiRes.result.sd;
-
-                    if (!download_URL) {
-                        return await replygckavi("🚫 Something went wrong.");
-                    }
-
-                    await socket.sendMessage(sender, { video: { url: download_URL }, mimetype: "video/mp4", caption: "Podda ayiya...." }, { quoted: msg });
-                }
-                break;
+                    const sentMsg = await socket.sendMessage(sender, {
+                        image: { url: "https://files.catbox.moe/qjae7t.jpg"},
+                        caption: kariyane,
+                        contextInfo: {
+                            mentionedJid: ['94740026280@s.whatsapp.net'],
+                            groupMentions: [],
+                            forwardingScore: 999,
+                            isForwarded: false,
+                            forwardedNewsletterMessageInfo: {
+                                newsletterJid: '120363402466616623@newsletter',
+                                newsletterName: "ᴋɪɴɢ-ᴘᴏᴅᴅᴀ-ᴍɪᴍɪ-ᴠ1",
+                                serverMessageId: 999
+                            },
+                            externalAdReply: {
+                                title: 'ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴍɪɴɪ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
+                                body: 'ᴋɪɴɢ-ᴘᴏᴅᴅᴀ-ᴍɪᴍɪ-ᴠ1',
+                                mediaType: 1,
+                                sourceUrl: "https://free-bot-virid.vercel.app/",
+                                thumbnailUrl: 'https://files.catbox.moe/qjae7t.jpg',
+                                renderLargerThumbnail: false,
+                                showAdAttribution: false
+                            }
+                        }
+                    });
+                    break;
+                                }
             
                 case 'chid': {
                     try {
