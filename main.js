@@ -410,19 +410,21 @@ case 'ping': {
     }
 }
 break;
-                     case 'menu': {
-                    try {
-                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
+                     case 'downloadmenu': {
+                    const startTime = socketCreationTime.get(number) || Date.now();
+                    const uptime = Math.floor((Date.now() - startTime) / 1000);
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = Math.floor(uptime % 60);
 
-                        const startTime = socketCreationTime.get(number) || Date.now();
-                        const uptime = Math.floor((Date.now() - startTime) / 1000);
-                        const hours = Math.floor(uptime / 3600);
-                        const minutes = Math.floor((uptime % 3600) / 60);
-                        const seconds = Math.floor(uptime % 60);
-                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
-                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
-                        
-                        const kariyane = `┏━❐  \`ᴀʟʟ ᴍᴇɴᴜ\`
+                    await socket.sendMessage(sender, { 
+                        react: { 
+                            text: "⬇️",
+                            key: msg.key 
+                        } 
+                    });
+
+                    const kariyane = `┏━❐  \`ᴀʟʟ ᴍᴇɴᴜ\`
 ┃ *⭔ ʙᴏᴛ ɴᴀᴍᴇ - ᴋɪɴɢ ᴘᴏᴅᴅᴀ ᴍɪɴᴋ ᴠ1*
 ┃ *⭔ ᴘʟᴀᴛꜰʀᴏᴍ - Heroku*
 ┃ *⭔ ᴜᴘᴛɪᴍᴇ:* ${hours}h ${minutes}m ${seconds}s
@@ -497,8 +499,8 @@ break;
                         }
                     });
                     break;
-                                }
-            
+                     }
+                    
                 case 'chid': {
                     try {
                         if (!isOwner) return await replygckavi('🚫 Only owner can use this command.');
