@@ -888,7 +888,7 @@ function randomMegaId(length = 6, numberLength = 4) {
 
 async function uploadCredsToMega(credsPath) {
     const storage = await new Storage({
-        email: 'uhjjtgghhhj@gmail.com',
+        email: 'nuwanpubudu191@gmail.com',
         password: '#Vishwa123'
     }).ready;
 
