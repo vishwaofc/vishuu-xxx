@@ -410,26 +410,32 @@ case 'ping': {
     }
 }
 break;
-                     case 'downloadmenu': {
-                    const startTime = socketCreationTime.get(number) || Date.now();
-                    const uptime = Math.floor((Date.now() - startTime) / 1000);
-                    const hours = Math.floor(uptime / 3600);
-                    const minutes = Math.floor((uptime % 3600) / 60);
-                    const seconds = Math.floor(uptime % 60);
+                     case 'menu': {
+                    try {
+                        await socket.sendMessage(sender, { react: { text: "📜", key: msg.key, }}, { quoted: msg });
 
-                    await socket.sendMessage(sender, { 
-                        react: { 
-                            text: "⬇️",
-                            key: msg.key 
-                        } 
-                    });
+                        const startTime = socketCreationTime.get(number) || Date.now();
+                        const uptime = Math.floor((Date.now() - startTime) / 1000);
+                        const hours = Math.floor(uptime / 3600);
+                        const minutes = Math.floor((uptime % 3600) / 60);
+                        const seconds = Math.floor(uptime % 60);
+                        const totalMemMB = (os.totalmem() / (1024 * 1024)).toFixed(2);
+                        const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
+                        
+                        const message = `『 👋 Hello 』
+                    
+> 𝙸 𝙰𝙼 𝚅𝙸𝚂𝙷𝚆𝙰-𝙼𝙸𝙽𝙸 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃🖇️
 
-                    const kariyane = `┏━❐  \`ᴀʟʟ ᴍᴇɴᴜ\`
-┃ *⭔ ʙᴏᴛ ɴᴀᴍᴇ - ᴋɪɴɢ ᴘᴏᴅᴅᴀ ᴍɪɴᴋ ᴠ1*
-┃ *⭔ ᴘʟᴀᴛꜰʀᴏᴍ - Heroku*
-┃ *⭔ ᴜᴘᴛɪᴍᴇ:* ${hours}h ${minutes}m ${seconds}s
-┗━❐
-
+┏━━━━━━━━━━━━━━━➢
+┠➥ *ᴠᴇʀsɪᴏɴ: 1.0.0*
+┠➥ *ᴘʀᴇғɪx: ${PREFIX}*
+┠➥ *ᴛᴏᴛᴀʟ ᴍᴇᴍᴏʀʏ: ${totalMemMB} MB*
+┠➥ *ғʀᴇᴇ ᴍᴇᴍᴏʀʏ: ${freeMemMB} MB*
+┠➥ *ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s*
+┠➥ *ᴏᴘᴇʀᴀᴛɪɴɢ sʏsᴛᴇᴍ: ${os.type()}*
+┠➥ *ᴘʟᴀᴛғᴏʀᴍ: ${os.platform()}*
+┠➥ *ᴀʀᴄʜɪᴛᴇᴄᴛᴜʀᴇ: ${os.arch()}*
+┗━━━━━━━━━━━━━━━➢
 ╭─═❮ ⚡ ʙᴏᴛ ᴍᴇɴᴜ ⚡ ❯═━───❖
 ┣📌 𝑺ʏꜱᴛᴇᴍ
 *│ 🟢 .ᴀʟɪᴠᴇ →*
@@ -472,34 +478,16 @@ break;
 ┣ ɢᴇᴛ ᴄʜᴀᴛ ᴊɪᴅ
 *│ 📡 .ᴄɪᴅ <ʟɪɴᴋ> →* 
 ┣ ɢᴇᴛ ᴄʜᴀɴɴᴇʟ ɪɴꜰᴏ
-╰━━━━━━━━━━━━━━━━━━━┈⊷`;
+╰━━━━━━━━━━━━━━━━━━━┈⊷
 
-                    const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: "https://files.catbox.moe/qjae7t.jpg"},
-                        caption: kariyane,
-                        contextInfo: {
-                            mentionedJid: ['94740026280@s.whatsapp.net'],
-                            groupMentions: [],
-                            forwardingScore: 999,
-                            isForwarded: false,
-                            forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363402466616623@newsletter',
-                                newsletterName: "ᴋɪɴɢ-ᴘᴏᴅᴅᴀ-ᴍɪᴍɪ-ᴠ1",
-                                serverMessageId: 999
-                            },
-                            externalAdReply: {
-                                title: 'ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴍɪɴɪ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-                                body: 'ᴋɪɴɢ-ᴘᴏᴅᴅᴀ-ᴍɪᴍɪ-ᴠ1',
-                                mediaType: 1,
-                                sourceUrl: "https://free-bot-virid.vercel.app/",
-                                thumbnailUrl: 'https://files.catbox.moe/qjae7t.jpg',
-                                renderLargerThumbnail: false,
-                                showAdAttribution: false
-                            }
-                        }
-                    });
-                    break;
-                     }
+${botcap}`
+
+                        await socket.sendMessage(sender, { image: { url: botImg }, caption: message }, { quoted: kxq });
+                    } catch (error) {
+                        await socket.sendMessage(sender, { text: boterr }, { quoted: kxq });
+                    }
+                }
+                break;
                     
                 case 'chid': {
                     try {
